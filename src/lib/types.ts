@@ -12,6 +12,7 @@ export type Paged<T> = {
 
 export type Diploma = {
   id: string;
+  image: string;
   title: string;
   description: string | null;
 };
