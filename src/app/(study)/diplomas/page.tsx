@@ -3,13 +3,12 @@ import Image from "next/image";
 import { Paged, Diploma } from "@/lib/types";
 import Link from "next/link";
 
-
 export default async function Diplomas({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string }>;
 }) {
-  const {page = "1"} = await searchParams;
+  const { page = "1" } = await searchParams;
   const result = await api<{ payload: Paged<Diploma> }>(
     `/api/diplomas?page=${page}&limit=12`,
   );
@@ -35,8 +34,14 @@ export default async function Diplomas({
         Page {result.payload.metadata.page} of{" "}
         {result.payload.metadata.totalPages}
       </p>
-      <Link href="/diplomas?page=1">1</Link>
-      <Link href="/diplomas?page=2">2</Link>
+      {Array.from(
+        { length: result.payload.metadata.totalPages },
+        (_, index) => index + 1,
+      ).map((page) => (
+        <Link key={page} href={`/diplomas?page=${page}`}>
+          {page}
+        </Link>
+      ))}
     </>
   );
 }
