@@ -25,7 +25,11 @@ export default async function Diplomas({
               width={320}
               height={180}
             />
-            <h3>{diploma.title}</h3>
+            <h3>
+              <Link href={`/diplomas/${diploma.id}`}>
+              {diploma.title}
+              </Link>
+              </h3>
             <p>{diploma.description}</p>
           </li>
         ))}
