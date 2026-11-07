@@ -15,6 +15,7 @@ export default async function ExamsPage({
   const result = await api<{ payload: Paged<Exam> }>(
     `/api/exams?diplomaId=${encodeURIComponent(id)}&page=${currentPage}&limit=12`,
   );
+  // throw new Error("Oops something went wrong");
   return (
     <>
       <Link href="/diplomas">Back to diplomas</Link>
