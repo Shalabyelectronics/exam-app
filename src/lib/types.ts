@@ -21,6 +21,7 @@ export type Exam = {
   id: string;
   title: string;
   duration: number;
+  description: string;
   questionsCount: number;
 };
 
