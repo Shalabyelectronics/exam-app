@@ -1,5 +1,6 @@
 import { api } from "@/lib/api";
 import { Exam, Question } from "@/lib/types";
+import ExamRunner from "@/features/questions/components/exam-runner";
 export default async function ExamPage({
   params,
 }: {
@@ -16,6 +17,7 @@ export default async function ExamPage({
       <h2>Exam : {exam.payload.exam.title}</h2>
       <p>{exam.payload.exam.description}</p>
       <p>you have {questions.payload.questions.length} questions</p>
+      <ExamRunner questions={questions.payload.questions} />
     </>
   );
 }
