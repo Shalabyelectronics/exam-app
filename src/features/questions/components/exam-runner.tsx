@@ -4,13 +4,14 @@ import { useState } from "react";
 
 export default function ExamRunner({ questions }: { questions: Question[] }) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [current, setCurrent] = useState(0);
 
   if (!questions.length) return <p>This exam has no questions.</p>;
 
   return (
     <>
-      {questions.map((question) => (
-        <fieldset key={question.id}>
+      {questions.map((question, index) => (
+        <fieldset key={question.id} hidden={index !== current}>
           <legend>{question.text}</legend>
           {question.answers.map((answer) => (
             <div key={answer.id}>
@@ -29,6 +30,21 @@ export default function ExamRunner({ questions }: { questions: Question[] }) {
           ))}
         </fieldset>
       ))}
+      <p>{`Question ${current + 1} of ${questions.length}`}</p>
+      <button
+        type="button"
+        disabled={current === 0}
+        onClick={() => setCurrent((prev) => prev - 1)}
+      >
+        Previous
+      </button>
+      <button
+        type="button"
+        disabled={current === questions.length - 1}
+        onClick={() => setCurrent((prev) => prev + 1)}
+      >
+        Next
+      </button>
     </>
   );
 }
