@@ -30,6 +30,12 @@ export default function ExamRunner({ questions }: { questions: Question[] }) {
           ))}
         </fieldset>
       ))}
+      <progress
+        aria-label="Questions answered"
+        max={questions.length}
+        value={Object.keys(answers).length}
+      ></progress>
+      <p>{`${Object.keys(answers).length} of ${questions.length} answered`}</p>
       <p>{`Question ${current + 1} of ${questions.length}`}</p>
       <button
         type="button"
