@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { api } from "@/lib/api";
 import type { Exam, Paged } from "@/lib/types";
-import Pager from "@/components/pager";
+import Pager from "@/shared/components/pager";
 export default async function ExamsPage({
   params,
   searchParams,
