@@ -1,15 +1,30 @@
 "use client";
 import type { Question } from "@/lib/types";
 import { useState } from "react";
+import useCountdown from "@/features/questions/hooks/use-countdown";
 
-export default function ExamRunner({ questions }: { questions: Question[] }) {
+export default function ExamRunner({
+  questions,
+  examId,
+  duration,
+}: {
+  questions: Question[];
+  examId: string;
+  duration: number;
+}) {
+  //States
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [current, setCurrent] = useState(0);
-
+  const clock = useCountdown(examId, duration);
   if (!questions.length) return <p>This exam has no questions.</p>;
 
   return (
     <>
+      <p role="timer">
+        {clock === null
+          ? "Preparing timer..."
+          : `${Math.floor(clock.remaining / 60)}:${String(clock.remaining % 60).padStart(2, "0")}`}
+      </p>
       {questions.map((question, index) => (
         <fieldset key={question.id} hidden={index !== current}>
           <legend>{question.text}</legend>

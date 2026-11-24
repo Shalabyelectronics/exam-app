@@ -17,7 +17,12 @@ export default async function ExamPage({
       <h2>Exam : {exam.payload.exam.title}</h2>
       <p>{exam.payload.exam.description}</p>
       <p>you have {questions.payload.questions.length} questions</p>
-      <ExamRunner questions={questions.payload.questions} />
+      <ExamRunner
+        questions={questions.payload.questions}
+        key={id}
+        examId={id}
+        duration={exam.payload.exam.duration}
+      />
     </>
   );
 }
